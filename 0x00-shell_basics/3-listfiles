@@ -1,3 +1,2 @@
 #!/bin/bash
 ls -l
-ls -l to display current working directory in long format
