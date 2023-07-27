@@ -1,4 +1,4 @@
-#!usr/bin/env bash
+#!/usr/bin/env bash
 #learn to use awk
 
 awk '{ print $1 " " $9 }' "apache-access.log"
