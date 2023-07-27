@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #print 10 lines of the string
 
-for i in {1..10};
+for i in {1..10}
 do
 	echo "Best School"
 done
