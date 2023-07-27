@@ -3,11 +3,11 @@
 
 hours=0
 
-while (( $hours<13 ));
+while (( $hours<13 ))
 do
 	echo "Hour: $hours"
 	minute=1
-	while (( $minute<=59 ));
+	while (( $minute<=59 ))
 	do
 		echo "$minute"
 		(( minute++ ))
