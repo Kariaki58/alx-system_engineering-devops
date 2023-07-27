@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#read username user id home from /etc/passwd
+
+while read -r data;
+do
+	echo "$data" | cut -d":" -f1,3,6
+done < /etc/passwd
