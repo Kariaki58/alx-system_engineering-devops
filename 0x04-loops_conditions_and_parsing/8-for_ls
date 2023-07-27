@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#Write a Bash script that displays: The content of the current directory
+
+for i in *
+do
+	if [[ ! "$i" == .* ]]
+	then
+		echo $i
+	fi
+done
