@@ -9,7 +9,7 @@ do
 	minute=1
 	while (( $minute<=59 ))
 	do
-		echo "$minute"
+		echo $(( minute ))
 		(( minute++ ))
 	done
 	(( hours++ ))
