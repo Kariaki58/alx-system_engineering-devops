@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-#client configuration file
-eval $(ssh-agent)
-ssh -add
