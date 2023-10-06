@@ -5,4 +5,4 @@ sed -i /localhost/d /etc/hosts.new
 echo -e "127.0.0.2\tlocalhost" >> /etc/hosts.new
 sed -i /facebook.com/d /etc/hosts.new
 echo -e "8.8.8.8\tfacebook.com" >> /etc/hosts.new
-cp -f /etc/hosts.new /etc/hosts
+sudo cp -f /etc/hosts.new /etc/hosts
