@@ -1,5 +1,5 @@
-### Solving All Alx Task Here
-**Hi ASK me about linux | c | python**
+### System Engineering
+
 ### Shell Basics
 
 Learning about shell
