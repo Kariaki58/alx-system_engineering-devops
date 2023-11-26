@@ -1,0 +1,6 @@
+Host ubuntuserver
+	Hostname 107.23.113.143
+	Port 22
+	IdentityFile ~/.ssh/school
+	PasswordAuthentication no
+	User ubuntu
