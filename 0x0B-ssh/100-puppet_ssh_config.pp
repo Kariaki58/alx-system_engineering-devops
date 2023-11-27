@@ -1,17 +1,13 @@
 # manifest testing
 
-include stdlib
-
-file_line { 'Turn off passwd auth':
+file { '/etc/ssh/ssh_config':
   ensure => present,
-  path   => '/etc/ssh/ssh_config',
-  line   => '\tPasswordAuthentication no',
-  replace => true,
 }
-
-file_line { 'Delare identity file':
-  ensure => present,
-  path   => '/etc/ssh/ssh_config',
-  line   => '\tIdentityFile ~/.ssh/school',
-  replace => true,
+exec { 'Turn off passwd auth':
+  command => '/usr/bin/echo -e "\tPasswordAuthentication no" >> /etc/ssh/ssh_config',
+  returns => [0, 1],
+}
+exec { 'Delare identity file':
+  command => '/usr/bin/echo -e "\tIdentityFile ~/.ssh/school" >> /etc/ssh/ssh_config',
+  returns  => [0, 1],
 }
