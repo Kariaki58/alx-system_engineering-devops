@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#redirect me
+./1-install_nginx_web_server
+sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location /redirect_me {
+        # 301 Moved Permanently Redirect to a specific YouTube URL
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOF
+
+# Restart nginx
+sudo service nginx restart
