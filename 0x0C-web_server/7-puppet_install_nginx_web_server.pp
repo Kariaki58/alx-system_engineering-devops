@@ -5,6 +5,10 @@ class nginx_config {
     ensure => installed,
   }
 
+  exec { 'echo tee index.nginx-debian.html':
+    command => "/usr/bin/echo 'Hello World!' | sudo /usr/bin/tee /var/www/html/index.nginx-debian.html"
+  }
+  
   file { '/etc/nginx/sites-available/default':
     ensure  => file,
     content => "
@@ -36,3 +40,4 @@ class nginx_config {
   }
 }
 include nginx_config
+
