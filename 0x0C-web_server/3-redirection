@@ -12,7 +12,6 @@ server {
     server_name _;
 
     location /redirect_me {
-        # 301 Moved Permanently Redirect to a specific YouTube URL
         return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
     }
 
@@ -21,6 +20,4 @@ server {
     }
 }
 EOF
-
-# Restart nginx
 sudo service nginx restart
