@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#transfer a file to your server
+echo "$1"
+# scp StrictHostKeyChecking=no
