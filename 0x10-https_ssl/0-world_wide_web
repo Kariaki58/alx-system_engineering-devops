@@ -3,15 +3,18 @@
 
 function Configure_domain () {
 	domains=("www" "lb-01" "web-01" "web-02")
-
-	for j in "${!domains[@]}"
-	do
-		if [ "${domains[$j]}" == "$2" ]
-		then
-			continue
-		fi
-		unset domains[$j]
-	done
+	
+	if [ -n "$2" ];
+	then	
+		for j in "${!domains[@]}"
+		do
+			if [ "${domains[$j]}" == "$2" ]
+			then
+				continue
+			fi
+			unset domains[$j]
+		done
+	fi
 	for i in "${!domains[@]}"
 	do
 		domain_point_to_ip="${domains[$i]}.$1"
