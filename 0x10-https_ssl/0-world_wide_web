@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#world wide web
+
+function Configure_domain () {
+	domains=("www" "lb-01" "web-01" "web-02")
+	for i in "${!domains[@]}"
+	do
+		domain_point_to_ip="${domains[$i]}.$1"
+		result=$(dig "$domain_point_to_ip" | grep -A1 'ANSWER SECTION:')
+		record_type=$(echo "$result" | awk '/IN/ {print $4}')
+		ip=$(echo "$result" | awk '/A/ {print $5}' | tr -d '\r\n')
+		echo "The subdomain ${domains[$i]} is a $record_type record and points to $ip"
+	done
+}
+
+Configure_domain $1
