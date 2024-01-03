@@ -11,12 +11,12 @@ from sys import argv
 
 if __name__ == "__main__":
 
-    sessionReq = requests.Session()
-
     id = argv[1]
     todo_id = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(id)
     userid = 'https://jsonplaceholder.typicode.com/users/{}'.format(id)
 
+    sessionReq = requests.Session()
+    
     employee = sessionReq.get(todo_id)
     employeeName = sessionReq.get(userid)
 
