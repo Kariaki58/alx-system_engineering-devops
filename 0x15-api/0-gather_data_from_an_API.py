@@ -12,9 +12,11 @@ def main(data):
     user_name = requests.get(base_url + "users/{}".format(data)).json()
     todo = requests.get(base_url + "todos", params={"userId": data}).json()
 
-    tasks = [h.get("title") for h in todo if h.get("completed") is True]
+    tasks = [d.get("title") for d in todo if d.get("completed") is True]
+    todo_length = len(todo)
+    tasks_length = len(tasks)
     print("Employee {} is done with tasks({}/{}):".format(
-        user_name.get("name"), len(tasks), len(todo)))
+        user_name.get("name"), tasks_length, todo_length))
     [print("\t {}".format(i)) for i in tasks]
 
 
