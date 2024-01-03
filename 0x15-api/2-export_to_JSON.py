@@ -13,10 +13,11 @@ def main(data):
     todo = requests.get(base_url + "todos", params={"userId": data}).json()
 
     filename = data + ".json"
-    with open(filename, mode="w") as file:
-        json.dump({data: [{"task": d.get("title"),
-                           "completed": d.get("completed"),
-                           "username": user_name} for d in todo]}, file)
+    with open(filename, "w") as file:
+        json.dump({data: [{"task": h.get("title"),
+                               "completed": h.get("completed"),
+                               "username": user_name} for h in todo]},
+                  file)
 
 if __name__ == "__main__":
     input_data = sys.argv[1]
