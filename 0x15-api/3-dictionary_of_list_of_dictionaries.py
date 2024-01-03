@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-import requests
+""" Dictionary of list of dictionaries"""
 import json
+import requests
 
 
 if __name__ == "__main__":
