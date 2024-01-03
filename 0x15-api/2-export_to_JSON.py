@@ -1,4 +1,4 @@
-#!/username/bin/python3
+#!/usr/bin/python3
 """export to json"""
 import json
 import requests
