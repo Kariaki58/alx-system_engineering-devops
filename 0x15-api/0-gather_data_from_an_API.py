@@ -1,35 +1,32 @@
 #!/usr/bin/python3
-"""get a data from api"""
+"""gather data from an API"""
+import json
 import requests
 import sys
 
-def get_employee_todo_progress(employee_id):
-    """get employee todo progress"""
-    base_url = "https://jsonplaceholder.typicode.com"
+
+def main(id):
+    """main function"""
+    todo_data = requests.get("https://jsonplaceholder.typicode.com/todos")
+    user_data = requests.get(f"https://jsonplaceholder.typicode.com/users/{id}")
+    employee_name = user_data.json()["name"]
+    count = 0
+    completed = 0
+    print(f"Employee {employee_name} is done with tasks ({completed}/{count}):")
+    for data in todo_data.json():
+        if data["userId"] == id:
+            count += 1
+        if data["completed"]:
+            completed += 1
+            print("\t{data[title]}")
     
-    user_response = requests.get(f"{base_url}/users/{employee_id}")
-    user_data = user_response.json()
-    
-    todo_response = requests.get(f"{base_url}/todos?userId={employee_id}")
-    todo_data = todo_response.json()
-    
-    completed_tasks = [task['title'] for task in todo_data if task['completed']]
-    
-    print(f"Employee {user_data['name']}\
-            is done with\
-            tasks({len(completed_tasks)}/{len(todo_data)}):")
-    for task in completed_tasks:
-        print(f"\t{task}")
+
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <employee_id>")
-        sys.exit(1)
-
+    input_number = sys.argv[1]
     try:
-        employee_id = int(sys.argv[1])
-    except ValueError:
-        print("Employee ID must be an integer.")
-        sys.exit(1)
+        integer = int(input_number)
+        main(integer)
+    except TypeError:
+        pass
 
-    get_employee_todo_progress(employee_id)
