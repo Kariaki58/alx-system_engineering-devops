@@ -15,10 +15,10 @@ if __name__ == "__main__":
     todo_id = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(id)
     userid = 'https://jsonplaceholder.typicode.com/users/{}'.format(id)
 
-    sessionReq = requests.Session()
-    
-    employee = sessionReq.get(todo_id)
-    employeeName = sessionReq.get(userid)
+    response = requests.Session()
+
+    employee = response.get(todo_id)
+    employeeName = response.get(userid)
 
     response_json = employee.json()
     user_json = employeeName.json()['username']
