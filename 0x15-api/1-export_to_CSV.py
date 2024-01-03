@@ -17,17 +17,17 @@ if __name__ == "__main__":
 
     response = requests.Session()
 
-    employee = response.get(todo_id)
-    employeeName = response.get(userid)
+    todos = response.get(todo_id)
+    user = response.get(userid)
 
-    response_json = employee.json()
-    user_json = employeeName.json()['username']
+    response_json = todos.json()
+    user_json = user.json()['username']
 
-    totalTasks = 0
+    content = 0
 
-    for done_tasks in response_json:
-        if done_tasks['completed']:
-            totalTasks += 1
+    for data in response_json:
+        if data['completed']:
+            content += 1
 
     fileCSV = id + '.csv'
 
