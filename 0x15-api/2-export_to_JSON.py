@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """export to json"""
 import json
-import sys
 import requests
+import sys
 
 
 def main(data):
