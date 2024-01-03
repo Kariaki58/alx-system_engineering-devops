@@ -16,9 +16,8 @@ def main(data):
     with open("{}.csv".format(data), mode="w") as file:
         writer = csv.writer(file, quoting=csv.QUOTE_ALL)
         for task in todo:
-            writer.writerow([data, task['userId'],
-                             task['completed',
-                            task['title']]])
+            writer.writerow([data, user_name, task.get('completed'),
+                            task.get('title')])
 
 
 if __name__ == "__main__":
