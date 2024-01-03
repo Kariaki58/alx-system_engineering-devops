@@ -14,8 +14,8 @@ def main(data):
      
     with open("{}.json".format(data), "w") as file_json:
         json.dump({data: [{"task": d.get("title"),
-                               "completed": d.get("completed"),
-                               "username": user_name} for d in todo]},
+                            "completed": d.get("completed"),
+                            "username": user_name} for d in todo]},
                   file_json)
 
 
