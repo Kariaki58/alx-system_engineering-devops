@@ -6,6 +6,7 @@ import sys
 
 
 def main(data):
+    """main documentation"""
     base_url = "https://jsonplaceholder.typicode.com/"
     users = requests.get(base_url + "users/{}".format(data)).json()
     user_name = users.get("username")
