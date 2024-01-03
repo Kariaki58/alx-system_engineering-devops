@@ -5,28 +5,22 @@ import requests
 import sys
 
 
-def main(id):
+def main(data):
     """main function"""
-    todo_data = requests.get("https://jsonplaceholder.typicode.com/todos")
-    user_data = requests.get(f"https://jsonplaceholder.typicode.com/users/{id}")
-    employee_name = user_data.json()["name"]
-    count = 0
-    completed = 0
-    print(f"Employee {employee_name} is done with tasks ({completed}/{count}):")
-    for data in todo_data.json():
-        if data["userId"] == id:
-            count += 1
-        if data["completed"]:
-            completed += 1
-            print("\t{data[title]}")
+    base_url = "https://jsonplaceholder.typicode.com/"
+
+    user_name = requests.get(base_url + "users/{}".format(data)).json()
+    todo = requests.get(base_url + "todos", params={"userId": data}).json()
+
+    tasks = [h.get("title") for h in todo if h.get("completed")
+                       is True]
+    print("Employee {} is done with tasks({}/{}):".format(
+        user_name.get("name"), len(tasks), len(todo)))
     
+    [print("\t {}".format(i)) for i in tasks]
 
 
 if __name__ == "__main__":
-    input_number = sys.argv[1]
-    try:
-        integer = int(input_number)
-        main(integer)
-    except TypeError:
-        pass
+    data_in = sys.argv[1]
+    main(data_in)
 
