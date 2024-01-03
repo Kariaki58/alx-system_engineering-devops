@@ -2,34 +2,34 @@
 """export to json"""
 import json
 import requests
-import sys
+from sys import argv
 
 
 if __name__ == "__main__":
-
-    id = sys.argv[1]
+    id = argv[1]
     todo_id = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(id)
     username = 'https://jsonplaceholder.typicode.com/users/{}'.format(id)
 
-    response = requests.Session()
-    employee = response.get(todo_id)
-    employeeName = response.get(username)
+    sessionReq = requests.Session()
 
-    to_json = employee.json()
-    username = employeeName.json()['username']
+    response = sessionReq.get(todo_id)
+    username = sessionReq.get(username)
 
-    emptylist = []
-    serilized = {}
+    responses = response.json()
+    usr = username.json()['username']
 
-    for data in to_json:
-        emptylist.append(
+    alltask = []
+    dictionary = {}
+
+    for data in responses:
+        alltask.append(
             {
                 "task": data.get('title'),
                 "completed": data.get('completed'),
-                "username": username,
+                "username": usr,
             })
-    serilized[id] = emptylist
+    dictionary[id] = alltask
 
-    json_file = id + "." + "json"
-    with open(json_file, 'w') as file:
-        json.dump(serilized, file)
+    file_Json = id + ".json"
+    with open(file_Json, 'w') as f:
+        json.dump(dictionary, f)
