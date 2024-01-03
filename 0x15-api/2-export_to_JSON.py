@@ -18,6 +18,7 @@ def main(data):
                                "username": user_name} for d in todo]},
                   file_json)
 
+
 if __name__ == "__main__":
     input_data = sys.argv[1]
     main(input_data)
