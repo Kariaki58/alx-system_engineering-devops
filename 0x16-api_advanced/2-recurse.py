@@ -9,8 +9,9 @@ def recurse(subreddit, hot_list=[], after=None):
     if not after:
         url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
     else:
-        url = f"https://www.reddit.com/r/{\
-                subreddit}/hot.json?limit=100&after={after}"
+        a = after
+        sub = subreddit
+        url = f"https://www.reddit.com/r/{sub}/hot.json?limit=100&after={a}"
 
     headers = {'User-Agent': 'MyCustomUserAgent/1.0'}
     response = requests.get(url, headers=headers)
