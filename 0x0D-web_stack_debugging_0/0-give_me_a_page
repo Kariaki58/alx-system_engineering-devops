@@ -2,8 +2,6 @@
 #commands used to fix the issue
 
 docker run -p 8080:80 -d -it holbertonschool/265-0
-docker exec -it $(docker ps -q) /bin/bash
-docker exec -it "$container_id" /bin/bash
 echo "Hello Holberton" > /var/www/html/index.html
 service apache2 restart
 
