@@ -2,8 +2,6 @@
 """
 count it
 """
-import json
-import time
 import requests
 
 
@@ -48,7 +46,9 @@ def count_words(subreddit, word_list, after="", counts=0):
         if not word_instances:
             print("")
             return
-        sorted_word_instances = sorted(word_instances.items(), key=lambda kv: (-kv[1], kv[0]))
+        sorted_word_instances = sorted(
+                word_instances.items(), key=lambda kv: (-kv[1], kv[0])
+                )
         for word, count in sorted_word_instances:
             print("{}: {}".format(word, count))
     else:
