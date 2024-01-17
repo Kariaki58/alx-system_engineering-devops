@@ -1,55 +1,45 @@
 #!/usr/bin/python3
 """
-count it
+imported request module
 """
 import requests
 
 
-def count_words(subreddit, word_list, after="", counts=0):
-    """count words"""
-    base_url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
-    headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
-    }
-    params = {
-        "after": after,
-        "count": counts,
-        "limit": 100
-    }
-    response = requests.get(base_url, headers=headers, params=params,
+
+def count_words(subreddit, word_list, word_count={}, after=None):
+    """
+    count words
+    """
+    response = requests.get(f"https://www.reddit.com/r/{subreddit}/hot.json",
+                            params={"after": after},
+                            headers={"User-Agent": "My-User-Agent"},
                             allow_redirects=False)
+    if response.status_code != 200:
+        return None
 
-    try:
-        results = response.json()
-        if response.status_code == 404:
-            raise Exception
-    except Exception:
-        print("")
-        return
+    reponse_json = response.json()
+    content = []
+    for d in reponse_json.get("data").get('children'):
+        content.append(d.get('data').get('title'))
+    if not content:
+        return None
+    word_list = list(dict.fromkeys(word_list))
+    if word_count == {}:
+        word_count = {word: 0 for word in word_list}
 
-    data = results.get("data")
-    new_after = data.get("after")
-    new_total_count = counts + data.get("dist")
+    for data in content:
+        split_word = data.split(' ')
+        for word in word_list:
+            for sm in split_word:
+                if sm.lower() == word.lower():
+                    word_count[word] += 1
 
-    word_instances = {}
-    for child in data.get("children"):
-        title_words = child.get("data").get("title").lower().split()
-        for search_word in word_list:
-            if search_word.lower() in title_words:
-                occurrences = title_words.count(search_word.lower())
-                if word_instances.get(search_word) is None:
-                    word_instances[search_word] = occurrences
-                else:
-                    word_instances[search_word] += occurrences
-
-    if new_after is None:
-        if not word_instances:
-            print("")
-            return
-        sorted_word_instances = sorted(
-                word_instances.items(), key=lambda kv: (-kv[1], kv[0])
-                )
-        for word, count in sorted_word_instances:
-            print("{}: {}".format(word, count))
+    if reponse_json.get("data").get("after") is None:
+        sorts = sorted(word_count.items(), key=lambda kv: kv[0])
+        sorts = sorted(word_count.items(), key=lambda kv: kv[1], reverse=True)
+        for key, value in sorts:
+            if value != 0:
+                print(f'{key}: {value}')
     else:
-        count_words(subreddit, word_list, new_after, new_total_count)
+        return count_words(subreddit, word_list, word_count,
+                           reponse_json.get("data").get("after"))
