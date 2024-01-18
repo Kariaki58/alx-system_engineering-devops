@@ -1,6 +1,5 @@
-
 frontend http_front
-    bind *:80
+    bind *:443 ssl crt /etc/letsencrypt/live/www.kariaki.tech/fullchain.pem
     mode http
     default_backend server_1
 
