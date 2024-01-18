@@ -1,0 +1,11 @@
+
+frontend http_front
+    bind *:80
+    mode http
+    default_backend server_1
+
+backend server_1
+    mode http
+    balance roundrobin
+    server 283294-web-01 100.25.205.94:80 check
+    server 283294-web-02 54.174.103.225:80 check
