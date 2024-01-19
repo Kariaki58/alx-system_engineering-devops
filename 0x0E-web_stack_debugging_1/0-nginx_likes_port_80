@@ -3,3 +3,5 @@
 sudo apt-get update
 sudo apt-get install nginx
 sudo service nginx start
+sed -i 's/^.*listen 80.*$/\tlisten 80 default_server;/g' /etc/nginx/nginx.conf
+sudo service nginx restart
