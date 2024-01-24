@@ -8,3 +8,19 @@ sudo apt-get update
 sudo apt-cache policy mysql-server
 sudo apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
 ```
+
+if you have issues on 3
+
+run 
+
+```
+sudo ufw disable
+```
+
+After installation
+
+run
+
+```
+sudo ufw enable
+```
