@@ -13,7 +13,7 @@ frontend http_front
 backend server_1
     mode http
     balance roundrobin
-    server 283294-web-01 100.25.205.94:80 check
-    server 283294-web-02 54.174.103.225:80 check
+    server 283294-web-01 54.237.18.166:80 check
+    server 283294-web-02 54.158.188.165:80 check
 " | sudo tee /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
