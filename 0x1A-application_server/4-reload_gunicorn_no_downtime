@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # No service interruption
 params=$2
-ps aux | grep gunicorn | grep -v grep | awk '{$params}' | xargs kill -HUP
+ps aux | grep gunicorn | grep -v grep | awk '{print $params}' | xargs kill -HUP
