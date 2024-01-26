@@ -1,0 +1,40 @@
+#app server nginx config
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    
+    server_name 54.237.18.166    
+    add_header X-Served-By 283294-web-01;
+    
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    location = /airbnb-onepage/ {
+        proxy_pass http://127.0.0.1:5000/airbnb-onepage/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location ~ /airbnb-dynamic/number_odd_or_even/(\d+) {
+        proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location / {
+       try_files $uri $uri/ =404;
+    }
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+
+    error_page 404 /custom_404.html;
+    location = /custom_404.html {
+        root /var/www/html;
+        internal;
+    }
+}
